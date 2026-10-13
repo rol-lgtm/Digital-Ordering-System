@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CU Dine-In</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f7f7f7;
+        }
+
+       
+        header {
+            height: 150px;
+            background: white;
+            border-bottom: 4px solid #b5121b;
+            padding: 10px 7%;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        .CUlogo {
+            height: 120px;
+            width: auto;
+            max-width: 45%;
+            object-fit: contain;
+        }
+
+       
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        h1, h2 {
+            color: #b5121b;
+        }
+
+  
+        .slideshow {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .slide {
+            display: none;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .caption {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 20px;
+            color: white;
+            background: rgba(0, 0, 0, 0.6);
+            font-size: 22px;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 45%;
+            background: #b5121b;
+            color: white;
+            border: 0;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+   
+        .foods {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            justify-content: center;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+
+  
+        .card {
+            background: white;
+            flex: 1 1 0;
+            min-width: 0;
+            padding-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px #ddd;
+        }
+
+        .card img {
+            display: block;
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card h3,
+        .card p {
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+
+        .price {
+            color: #b5121b;
+            font-weight: bold;
+        }
+
+        .add {
+            background: #b5121b;
+            color: white;
+            border: 0;
+            padding: 8px 15px;
+            margin-left: 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .add:hover {
+            background: #8d0d14;
+        }
+
+        .order {
+            margin-top: 25px;
+            padding: 15px;
+            background: #b5121b;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 6px;
+            gap: 15px;
+        }
+
+        .continue {
+            background: white;
+            color: #b5121b;
+            border: 0;
+            padding: 9px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .continue:hover {
+            background: #eee;
+        }
+
+   
+        @media (max-width: 1440px) {
+            .container {
+                max-width: 1100px;
+            }
+        }
+
+
+        @media (max-width: 1024px) {
+            .container {
+                max-width: 900px;
+            }
+
+            .foods {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .card {
+                flex: 0 1 250px;
+                width: 250px;
+                min-height: 350px;
+            }
+
+            .card img {
+                height: 170px;
+            }
+
+            .slideshow {
+                height: 280px;
+            }
+        }
+
+  
+        @media (max-width: 600px) {
+            header {
+                height: 110px;
+                padding: 8px 4%;
+            }
+
+            .CUlogo {
+                height: 85px;
+                max-width: 45%;
+            }
+
+            .container {
+                width: 100%;
+                margin: 20px auto;
+                padding: 0 15px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            .slideshow {
+                height: 220px;
+            }
+
+            .caption {
+                padding: 15px;
+                font-size: 18px;
+            }
+
+       
+            .foods {
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+            }
+
+            .card {
+                width: 100%;
+                min-height: 0;
+                flex: 1 1 auto;
+            }
+
+            .card img {
+                height: 200px;
+            }
+
+            .order {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .continue {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <header>
+        <div class="logo">
+
+ 
+            <img
+                class="CUlogo"
+                src="cs.png"
+                alt="College of Computer Studies Logo"
+            >
+
+            <img
+                class="CUlogo"
+                src="cu.png"
+                alt="Capitol University Logo"
+            >
+
+        </div>
+    </header>
+
+    <div class="container">
+
+        <h1>Take Out</h1>
+        <p>Choose your favorite food and add it to your order.</p>
+
+      
+        <div class="slideshow">
+
+            <div class="slide active">
+                <img
+                    src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1000"
+                    alt="Classic Burger"
+                >
+                <div class="caption">Classic Burger</div>
+            </div>
+
+            <div class="slide">
+                <img
+                    src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=1000"
+                    alt="Cheese Pizza"
+                >
+                <div class="caption">Cheese Pizza</div>
+            </div>
+
+            <div class="slide">
+                <img
+                    src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1000"
+                    alt="Healthy Rice Bowl"
+                >
+                <div class="caption">Healthy Rice Bowl</div>
+            </div>
+
+            <button
+                class="arrow prev"
+                onclick="changeSlide(-1)"
+                aria-label="Previous slide"
+            >❮</button>
+
+            <button
+                class="arrow next"
+                onclick="changeSlide(1)"
+                aria-label="Next slide"
+            >❯</button>
+
+        </div>
+
+
+        <h2>Popular Meals</h2>
+
+        <div class="foods">
+
+
+            <div class="card">
+                <img
+                    src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500"
+                    alt="Classic Burger"
+                >
+
+                <h3>Classic Burger</h3>
+                <p class="price">₱249</p>
+
+                <button
+                    class="add"
+                    onclick="addFood('Classic Burger', 249)"
+                >
+                    Add
+                </button>
+            </div>
+
+            <div class="card">
+                <img
+                    src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=500"
+                    alt="Cheese Pizza"
+                >
+
+                <h3>Cheese Pizza</h3>
+                <p class="price">₱299</p>
+
+                <button
+                    class="add"
+                    onclick="addFood('Cheese Pizza', 299)"
+                >
+                    Add
+                </button>
+            </div>
+
+            <div class="card">
+                <img
+                    src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500"
+                    alt="Rice Bowl"
+                >
+
+                <h3>Rice Bowl</h3>
+                <p class="price">₱189</p>
+
+                <button
+                    class="add"
+                    onclick="addFood('Rice Bowl', 189)"
+                >
+                    Add
+                </button>
+            </div>
+
+        </div>
+
+        <div class="order">
+
+            <div>
+                Items: <span id="items">0</span>
+                |
+                Total: ₱<span id="total">0</span>
+            </div>
+
+            <button class="continue" onclick="continueOrder()">
+                Continue
+            </button>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        let slideIndex = 0;
+
+        const slides = document.querySelectorAll(".slide");
+
+        function changeSlide(direction) {
+            slides[slideIndex].classList.remove("active");
+
+            slideIndex += direction;
+
+            if (slideIndex >= slides.length) {
+                slideIndex = 0;
+            }
+
+            if (slideIndex < 0) {
+                slideIndex = slides.length - 1;
+            }
+
+            slides[slideIndex].classList.add("active");
+        }
+
+
+        let items = 0;
+        let total = 0;
+        let order = [];
+
+        function addFood(name, price) {
+            items++;
+            total += price;
+
+            order.push({
+                name: name,
+                price: price
+            });
+
+            updateOrder();
+
+            alert(name + " added to your order!");
+        }
+
+        function updateOrder() {
+            document.getElementById("items").textContent = items;
+
+            document.getElementById("total").textContent =
+                total.toLocaleString("en-PH");
+        }
+
+        function continueOrder() {
+            if (items === 0) {
+                alert("Please add food first.");
+                return;
+            }
+
+            let message = "CU DINE-IN ORDER SUMMARY\n\n";
+
+            order.forEach(function(item) {
+                message += item.name + " - ₱" +
+                    item.price.toLocaleString("en-PH") + "\n";
+            });
+
+            message += "\nItems: " + items;
+            message += "\nTotal: ₱" + total.toLocaleString("en-PH");
+
+            alert(message);
+        }
+    </script>
+
+</body>
+</html>

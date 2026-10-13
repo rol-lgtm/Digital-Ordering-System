@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dine In or Take Out</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-image: url("foodcourt.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding-bottom: 50px;
+    }
+
+    .wrapper {
+      width: 250px;
+      text-align: center;
+    }
+
+    h2 {
+      color: white;
+      font-size: 18px;
+      margin-bottom: 15px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    }
+
+    .btn {
+      display: block;
+      background: white;
+      color: black;
+      padding: 12px;
+      margin-bottom: 10px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      border: 1px solid silver;
+    }
+
+    .btn:hover {
+      background: green;
+      color: white;
+    }
+
+    @media (max-width: 600px) {
+      .wrapper {
+        width: 85%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <h2>Select Order Type</h2>
+    
+    <a href="padernalPage3.html" class="btn">Dine In</a>
+    <a href="castillonPage4.html" class="btn">Take Out</a>
+  </div>
+
+</body>
+</html>
